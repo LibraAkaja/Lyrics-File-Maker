@@ -4,10 +4,29 @@
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lyrics File Maker</title>
+    <link href="https://fonts.cdnfonts.com/css/leoscar" rel="stylesheet">
 </head>
 <body>
-    
+    <audio id="aud" preload="auto"></audio>
+    <h1>Lyrics File Maker</h1>
+    <h3>Your .lrc file maker</h3>
+    <br><br>
+    <div id="inputContainer">
+        <input type="file" id="a" class="hidden">
+        <div class="input">
+            Choose Audio&nbsp;
+            <div id="iconContainer">
+                <img src="Assets/attach.svg" width="20">
+            </div>
+        </div>
+    </div>
+    <div class="playerContainer">
+        <div class="player">
+            <div id="ppIcon" onclick="playAudio()"><img id="pIcon" src="Assets/play.svg"></div>
+            <div id="fileName">No File Chosen</div>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>

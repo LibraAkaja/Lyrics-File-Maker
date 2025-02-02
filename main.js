@@ -1,3 +1,6 @@
+const a = document.querySelector("#aud");
+const icon = document.querySelector("#pIcon");
+
 document.querySelector("#iconContainer").addEventListener("click", function() {
     document.querySelector("#a").click();
 });
@@ -14,8 +17,6 @@ document.querySelector("#a").addEventListener("change", function() {
 });
 
 function playAudio(){
-    const icon = document.querySelector("#pIcon");
-    const a = document.querySelector("#aud");
     if(icon.src.includes("play.svg")){
         icon.src = "Assets/pause.svg";
         a.play().catch((error) => {
@@ -23,7 +24,12 @@ function playAudio(){
         });
     }
     else{
-        icon.src = "Assets/play.svg"
+        icon.src = "Assets/play.svg";
         a.pause();
     }
 }
+
+a.addEventListener("ended",()=>{
+    icon.src = "Assets/play.svg";
+});
+

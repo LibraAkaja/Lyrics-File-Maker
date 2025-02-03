@@ -44,11 +44,19 @@ function conditionalRender1(){
                 setTimeout(() => {
                     // let lyrics = getLyrics();
                     removeDElement(".confirmLyrics");
+                    changeLIcss();
                     conditionalRender2();
                 }, 1000);
             },{once:true});
         }, 1000);
     }, {once:true});
+}
+
+//Changes css of lyricsInput textarea
+function changeLIcss(){
+    const li = document.querySelector(".lyricsInput");
+    li.setAttribute("readOnly","true");
+    li.style.cursor = "default";
 }
 
 function conditionalRender2(){

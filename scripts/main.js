@@ -1,7 +1,7 @@
 import { createDElement, addText, removeDElement, changeHeight } from "./dynamicComponents.js";
 
 const a = document.querySelector("#aud");
-const icon = document.querySelector("#pIcon");
+const ppIcon = document.querySelector("#ppIcon");
 
 //Clicking attach icon changes state of the hidden input field
 document.querySelector("#iconContainer").addEventListener("click", function() {
@@ -21,7 +21,8 @@ document.querySelector("#a").addEventListener("change", function() {
     }
 });
 
-//Function to change DOM 
+//Functions to change DOM
+
 function conditionalRender1(){
     createDElement("body","div","confirmAudio");
     addText(".confirmAudio","Use this audio?");
@@ -57,6 +58,13 @@ function conditionalRender2(){
     createDElement(".buttons","div","button");
     createDElement(".buttons","div","button");
     createDElement(".buttons","div","button");
+    conditionalRender3();
+}
+
+function conditionalRender3(){
+    document.querySelector(".buttons > :nth-child(1)").addEventListener("click", () => {
+        ppAudio(ppIcon);
+    });
 }
 
 //To trigger changes in the tickbox
@@ -67,21 +75,50 @@ function tickEvents(event){
 }
 
 //Plays audio when play icon is clicked and performs other necessary actions
-document.querySelector("#ppIcon").addEventListener("click",function(){
-    if(icon.src.includes("play.svg") && document.querySelector("#fileName").textContent != "No File Chosen"){
-        icon.src = "Assets/pause.svg";
-        a.play().catch((error) => {
-            console.error("Error playing audio: ",error);
-        });
-    }
-    else{
-        icon.src = "Assets/play.svg";
-        a.pause();
+document.querySelector("#ppIcon").addEventListener("click", ()=>{
+    if(document.querySelector("#fileName").textContent != "No File Chosen"){
+        ppAudio(ppIcon);
     }
 });
 
+//To validate the presence of the second play/pause button that appears on confirming lyrics
+function checkStatus(){
+    if(document.querySelector(".buttons > :nth-child(1)")){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+function ppAudio(e) {
+    const stats = checkStatus();
+    const computedStyle = window.getComputedStyle(e);
+    const bgImage = computedStyle.backgroundImage;
+    if(bgImage.includes("play.svg")){
+        if(stats === 1){
+            document.querySelector(".buttons > :nth-child(1)").style.backgroundImage = "url(Assets/pause.svg)";
+        }
+        e.style.backgroundImage = "url(Assets/pause.svg)";
+        a.play().catch((error) => {
+            console.error("Error playing audio: ", error);
+        }); 
+    }
+    else{
+        e.style.backgroundImage = "url(Assets/play.svg)";
+        if(stats === 1){
+            document.querySelector(".buttons > :nth-child(1)").style.backgroundImage = "url(Assets/play.svg)";
+        }
+        a.pause();
+    }
+}
+
 //Reverts the icon back to the play icon once the audio finishes playing once
 a.addEventListener("ended",()=>{
-    icon.src = "Assets/play.svg";
+    const stats = checkStatus();
+    if(stats === 1){
+        document.querySelector(".buttons > :nth-child(1)").style.backgroundImage = "url(Assets/play.svg)";
+    }
+    ppIcon.style.backgroundImage = "url(Assets/play.svg)";
 });
 

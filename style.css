@@ -120,10 +120,6 @@ h1{
     cursor: pointer;
 }
 
-.confirmAudio,.askLyrics{
-    margin-top: 20px;
-}
-
 .mainContainer{
     border-radius: 5px;
     width: 75%;
@@ -140,6 +136,11 @@ h1{
     height: 300px;
     font-size: 15px;
     color: grey;
+}
+
+.lyricsInput::selection{
+    background: transparent;
+    color: wheat;
 }
 
 .confirmLyrics{
@@ -185,7 +186,11 @@ h1{
     border: 2px solid #b70dfa;
 }
 
-h1,h3,.input,.player,.confirmAudio,.askLyrics,.confirmLyrics{
+.confirmAudio,.askLyrics,.timer{
+    margin-top: 20px;
+}
+
+h1,h3,.input,.player,.confirmAudio,.askLyrics,.confirmLyrics,.timer{
     background: linear-gradient(to left, #FE03EE, #0DF4FA);
     background-clip: text;
     color: transparent;

@@ -1,4 +1,9 @@
-import { createDElement, addText, removeDElement, changeHeight } from "./dynamicComponents.js";
+import { createDElement, addText, removeText ,removeDElement } from "./dynamicComponents.js";
+import { changeCSS } from "./dynamicComponents.js"
+import { showTimer, startTimer, pauseTimer, resetTimer } from "./dynamicComponents.js"
+import { checkBStatus, checkTStatus ,xchgReln} from "./dynamicComponents.js"
+import { highlightNextLine } from "./dynamicComponents.js";
+import { resetHighlight } from './dynamicComponents.js'
 
 const a = document.querySelector("#aud");
 const ppIcon = document.querySelector("#ppIcon");
@@ -17,6 +22,9 @@ document.querySelector("#a").addEventListener("change", function() {
         let audioElement = document.querySelector("#aud");
         audioElement.src = fileURL;
         audioElement.load();        //Load the audio
+        if(document.querySelector(".confirmAudio")){
+            removeDElement(".confirmAudio");
+        }
         conditionalRender1();
     }
 });
@@ -30,6 +38,7 @@ function conditionalRender1(){
     document.querySelector(".tick").addEventListener("click",(event) => {
         tickEvents(event);
         setTimeout(() => {
+            removeDElement(".inputContainer");
             removeDElement(".confirmAudio");
             createDElement("body","div","askLyrics");
             addText(".askLyrics","Paste the lyrics below");
@@ -42,8 +51,11 @@ function conditionalRender1(){
             document.querySelector(".tick").addEventListener("click",(event) => {
                 tickEvents(event);
                 setTimeout(() => {
-                    // let lyrics = getLyrics();
                     removeDElement(".confirmLyrics");
+                    removeText(".askLyrics");
+                    createDElement(".askLyrics","div","timer");
+                    xchgReln(".askLyrics");
+                    showTimer(".timer");
                     changeLIcss();
                     conditionalRender2();
                 }, 1000);
@@ -52,15 +64,8 @@ function conditionalRender1(){
     }, {once:true});
 }
 
-//Changes css of lyricsInput textarea
-function changeLIcss(){
-    const li = document.querySelector(".lyricsInput");
-    li.setAttribute("readOnly","true");
-    li.style.cursor = "default";
-}
-
 function conditionalRender2(){
-    changeHeight(".lyricsInput","250px");
+    changeCSS(".lyricsInput","height","225px");
     createDElement(".mainContainer","div","buttons");
     createDElement(".buttons","div","button");
     createDElement(".buttons","div","button");
@@ -71,8 +76,44 @@ function conditionalRender2(){
 
 function conditionalRender3(){
     document.querySelector(".buttons > :nth-child(1)").addEventListener("click", () => {
-        ppAudio(ppIcon);
+        ppAudio();
+        if(document.querySelector(".buttons > :nth-child(1)").style.backgroundImage == "url(Assets/pause.svg)"){
+            startTimer(".timer");
+            // startHighlighting(); 
+        }
     });
+    document.querySelector(".buttons > :nth-child(2)").addEventListener("click", () => {
+        resetPPIcons();
+        resetAudio();
+        resetTimer();
+        resetHighlight();
+    });
+    document.querySelector(".buttons > :nth-child(3)").addEventListener("click",highlightNextLine);
+}
+
+// Change the play/pause icon to Play icon 
+function resetPPIcons(){
+    const bStats = checkBStatus();
+    changeCSS("#ppIcon","backgroundImage","url(Assets/play.svg)");
+    if(bStats === 1){
+        changeCSS(".buttons > :nth-child(1)","backgroundImage","url(Assets/play.svg)");
+    }
+}
+
+//Change the play/pause icon to Pause icon
+function setPPIcons(){
+    const bStats = checkBStatus();
+    if(bStats === 1){
+        changeCSS(".buttons > :nth-child(1)","backgroundImage","url(Assets/pause.svg)");
+    }
+    changeCSS("#ppIcon","backgroundImage","url(Assets/pause.svg)");
+}
+
+//Changes css of lyricsInput textarea
+function changeLIcss(){
+    const li = document.querySelector(".lyricsInput");
+    li.setAttribute("readOnly","true");
+    changeCSS(".lyricsInput","cursor","default");
 }
 
 //To trigger changes in the tickbox
@@ -85,48 +126,40 @@ function tickEvents(event){
 //Plays audio when play icon is clicked and performs other necessary actions
 document.querySelector("#ppIcon").addEventListener("click", ()=>{
     if(document.querySelector("#fileName").textContent != "No File Chosen"){
-        ppAudio(ppIcon);
+        ppAudio();
     }
 });
 
-//To validate the presence of the second play/pause button that appears on confirming lyrics
-function checkStatus(){
-    if(document.querySelector(".buttons > :nth-child(1)")){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
-
-function ppAudio(e) {
-    const stats = checkStatus();
-    const computedStyle = window.getComputedStyle(e);
+//Function to play/pause audio
+function ppAudio() {
+    const computedStyle = window.getComputedStyle(ppIcon);
     const bgImage = computedStyle.backgroundImage;
     if(bgImage.includes("play.svg")){
-        if(stats === 1){
-            document.querySelector(".buttons > :nth-child(1)").style.backgroundImage = "url(Assets/pause.svg)";
-        }
-        e.style.backgroundImage = "url(Assets/pause.svg)";
+        setPPIcons();
         a.play().catch((error) => {
             console.error("Error playing audio: ", error);
         }); 
+        startTimer();
     }
     else{
-        e.style.backgroundImage = "url(Assets/play.svg)";
-        if(stats === 1){
-            document.querySelector(".buttons > :nth-child(1)").style.backgroundImage = "url(Assets/play.svg)";
-        }
+        resetPPIcons();
         a.pause();
+        pauseTimer();
     }
+}
+
+//Function to reset audio
+function resetAudio(){
+    a.pause();
+    a.currentTime = 0;
 }
 
 //Reverts the icon back to the play icon once the audio finishes playing once
 a.addEventListener("ended",()=>{
-    const stats = checkStatus();
+    const stats = checkBStatus();
     if(stats === 1){
-        document.querySelector(".buttons > :nth-child(1)").style.backgroundImage = "url(Assets/play.svg)";
+        changeCSS(".buttons > :nth-child(1)","backgroundImage","url(Assets/play.svg)");
     }
-    ppIcon.style.backgroundImage = "url(Assets/play.svg)";
+    changeCSS("#ppIcon","backgroundImage","url(Assets/play.svg)");
+    pauseTimer();
 });
-

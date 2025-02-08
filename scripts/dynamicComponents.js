@@ -2,6 +2,7 @@
 // elementParent is the html element or its id or class name
 // elementType is the type of the element: e.g. div, input, button, etc.
 // className is the class name to be set for the new element
+
 export function createDElement(elementParent,elementType,className){
     const parentE = document.querySelector(elementParent);
     const newElem = document.createElement(elementType);
@@ -40,7 +41,7 @@ export function xchgReln(e){
 //Function to initiate the timer
 export function showTimer(e){
     const parentE = document.querySelector(e);
-    addText(e,"00:00:00");
+    addText(e,"00:00.00");
 }
 
 //To validate the presence of the second play/pause button that appears on confirming lyrics
@@ -65,13 +66,13 @@ export function checkTStatus(){
 
 /*All about Timer*/
 
-let hr = 0, min = 0, sec = 0;
+let min = 0, sec = 0, ms = 0;
 let timeInterval = null;
 
 function updateTimerDisplay() {
     const timerElement = document.querySelector(".timer");
     if(timerElement){
-        document.querySelector(".timer").textContent = `${String(hr).padStart(2, '0')}:${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+        document.querySelector(".timer").textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
     }
 }
 
@@ -81,17 +82,17 @@ export function startTimer(e){
         const parentE = document.querySelector(e);
         if (timeInterval) return; // Prevent multiple intervals
                 timeInterval = setInterval(() => {
-                    sec++;
+                    ms++;
+                    if (ms === 100) {
+                        ms = 0;
+                        sec++;
+                    }
                     if (sec === 60) {
                         sec = 0;
                         min++;
                     }
-                    if (min === 60) {
-                        min = 0;
-                        hr++;
-                    }
                     updateTimerDisplay();
-                }, 1000);
+                }, 10);
     }
 }
 
@@ -105,13 +106,14 @@ export function pauseTimer(){
 
 export function resetTimer(){
     pauseTimer();
-    hr = 0, min = 0, sec = 0;
+    min = 0, sec = 0, ms = 0;
     updateTimerDisplay();
 }
 
 /* ***End of Timer*** */
 
 let currentLineIndex = 0;
+let lFileContent = "[ti:"+document.querySelector("#fileName").textContent+"]\n[re:libraakaja.github.io/Lyrics-File-Maker/]\n\n";
 export function highlightNextLine(){
     const tArea = document.querySelector(".lyricsInput");
     const lyrics = tArea.value;
@@ -123,14 +125,26 @@ export function highlightNextLine(){
         console.log("No text found in the lyrics!");
         return;
     }
-    
+
     if(currentLineIndex >= sentences.length){
         btn.disabled = true;
-        console.log("Creating lyrical file");
+        console.log("\nCreating lyrical file");
+        const fileBtn = document.querySelector(".buttons > :nth-child(4)");
+        fileBtn.addEventListener("click",() => {
+            const blob = new Blob([lFileContent], {type: "text/plain"});
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = document.querySelector("#fileName").textContent.replace(".mp3","") + ".lrc";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
         return;
     }
 
     const sentence = sentences[currentLineIndex].trim();    //Taking just a line from the whole lyrics
+
+    lFileContent += "["+document.querySelector(".timer").textContent+"]"+sentence+"\n";
     
     //To find the actual position of a line in the lyrics
     const regEx = new RegExp(`(^|\\s{2,}|\\n)(${sentence.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "g");

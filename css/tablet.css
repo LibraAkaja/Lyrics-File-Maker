@@ -1,26 +1,29 @@
 @media only screen and (min-width: 426px){
     h1,h3{
         transform: scale(1.5);
+        overflow: hidden;
     }
     h3{
         margin-top: 10px;
     }
     .inputContainer{
         margin-top: 25px;
-        transform: scale(1.75);
+        transform: scale(1.5);
     }
     .playerContainer{
-        width: 50%;
-        transform: scale(1.25);
+        width: 40%;
+        transform: scale(1.15);
+        margin-top: 3vh;
     }
     .confirmAudio, .askLyrics{
         width: 40%;
-        transform: scale(1.35);
+        transform: scale(1.25);
         margin-top: 35px;
+        overflow: hidden;
     }
     .mainContainer{
         margin-top: 20px;
-        height: 315px;
+        height: 355px;
     }
     .lyricsInput{
         width: 80%;
@@ -30,9 +33,15 @@
     .confirmLyrics,.timer{
         transform: scale(1.35);
     }
+    .confirmLyrics{
+        width: 40%;
+        margin-top: 20px;
+        height: 20px
+    }
     .timer{
         margin-top: 35px;
         font-size: 20px;
+        overflow: hidden;
     }
     .buttons{
         width: 70%;

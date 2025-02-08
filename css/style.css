@@ -88,7 +88,7 @@ h1{
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
-    background: url(Assets/play.svg) no-repeat center;
+    background: url(../Assets/play.svg) no-repeat center;
 }
 
 #pIcon{
@@ -167,22 +167,22 @@ h1{
 }
 
 .buttons > *:nth-child(1){
-    background: url(Assets/play.svg) no-repeat center;
+    background: url(../Assets/play.svg) no-repeat center;
     border: 2px solid #0DF4FA;
 }
 
 .buttons > *:nth-child(2){
-    background: url(Assets/reset.svg) no-repeat center;
+    background: url(../Assets/reset.svg) no-repeat center;
     border: 2px solid #480dfa;
 }
 
 .buttons > *:nth-child(3){
-    background: url(Assets/nextLine.svg) no-repeat center;
+    background: url(../Assets/nextLine.svg) no-repeat center;
     border: 2px solid #870dfa;
 }
 
 .buttons > *:nth-child(4){
-    background: url(Assets/download.svg) no-repeat center;
+    background: url(../Assets/download.svg) no-repeat center;
     border: 2px solid #b70dfa;
 }
 

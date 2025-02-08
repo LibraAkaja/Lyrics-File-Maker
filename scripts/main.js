@@ -1,9 +1,8 @@
 import { createDElement, addText, removeText ,removeDElement } from "./dynamicComponents.js";
-import { changeCSS } from "./dynamicComponents.js"
-import { showTimer, startTimer, pauseTimer, resetTimer } from "./dynamicComponents.js"
-import { checkBStatus, checkTStatus ,xchgReln} from "./dynamicComponents.js"
-import { highlightNextLine } from "./dynamicComponents.js";
-import { resetHighlight } from './dynamicComponents.js'
+import { changeCSS } from "./dynamicComponents.js";
+import { showTimer, startTimer, pauseTimer, resetTimer, xchgReln } from "./timer.js";
+import { checkBStatus } from "./dynamicComponents.js";
+import { highlightNextLine, resetHighlight } from "./highlighter.js";
 
 const a = document.querySelector("#aud");
 const ppIcon = document.querySelector("#ppIcon");

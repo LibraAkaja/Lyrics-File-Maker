@@ -1,0 +1,45 @@
+@media only screen and (min-width: 426px){
+    h1,h3{
+        transform: scale(1.5);
+    }
+    h3{
+        margin-top: 10px;
+    }
+    .inputContainer{
+        margin-top: 25px;
+        transform: scale(1.75);
+    }
+    .playerContainer{
+        width: 50%;
+        transform: scale(1.25);
+    }
+    .confirmAudio, .askLyrics{
+        width: 40%;
+        transform: scale(1.35);
+        margin-top: 35px;
+    }
+    .mainContainer{
+        margin-top: 20px;
+        height: 315px;
+    }
+    .lyricsInput{
+        width: 80%;
+        font-size: 20px;
+        border-radius: 1rem;
+    }
+    .confirmLyrics,.timer{
+        transform: scale(1.35);
+    }
+    .timer{
+        margin-top: 35px;
+        font-size: 20px;
+    }
+    .buttons{
+        width: 70%;
+        transform: scale(1.2);
+        position: relative;
+        left: 14.5%;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+}

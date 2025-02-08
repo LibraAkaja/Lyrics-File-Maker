@@ -78,7 +78,6 @@ function conditionalRender3(){
         ppAudio();
         if(document.querySelector(".buttons > :nth-child(1)").style.backgroundImage == "url(Assets/pause.svg)"){
             startTimer(".timer");
-            // startHighlighting(); 
         }
     });
     document.querySelector(".buttons > :nth-child(2)").addEventListener("click", () => {

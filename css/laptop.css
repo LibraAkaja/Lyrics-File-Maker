@@ -1,0 +1,87 @@
+@media only screen and (min-width: 769px){
+    .playerContainer{
+        width: 30%;
+    }
+    .lyricsInput{
+        width: 65%;
+    }
+    .buttons{
+        justify-content: space-evenly;
+    }
+}
+
+@media only screen and (min-width: 1025px){
+    .playerContainer{
+        width: 22%;
+    }
+    .confirmAudio,.confirmLyrics{
+        width: 23%;
+    }
+    .askLyrics{
+        font-size: 20px;
+    }
+    .lyricsInput{
+        width: 50%;
+    }
+    .confirmLyrics{
+        margin-top: 20px;
+    }
+    .buttons{
+        width: 50%;
+        left: 25%;
+    }
+    .mainContainer{
+        height: 450px;
+    }
+}
+
+@media only screen and (min-width: 1441px){
+    h1{
+        margin-top: 6vh;
+        transform: scale(2.5);
+    }
+    h3{
+        margin-top: 3vh;
+        transform: scale(2.5);
+    }
+    .playerContainer{
+        transform: scale(2);
+        width: 12%;
+    }
+    .inputContainer,.confirmAudio,.confirmLyrics{
+        transform: scale(2.25);
+    }
+    .playerContainer,.inputContainer,.confirmAudio{
+        margin-top: 5vh;
+    }
+    .confirmAudio{
+        width: 10%;
+    }
+    .askLyrics,.timer{
+        margin-top: 5vh;
+        transform: scale(2);
+    }
+    .mainContainer{
+        margin-top: 3vh;
+        height: 700px;
+    }
+    .lyricsInput{
+        font-size: 35px;
+        height: 80%;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    .confirmLyrics{
+        width: 10%;
+        position: relative;
+        top: -7%;
+    } 
+    .buttons{
+        transform: scale(2.25);
+        width: 20%;
+        justify-content: space-around;
+        position: relative;
+        top: 3%;
+        left: 40%;
+    }
+}

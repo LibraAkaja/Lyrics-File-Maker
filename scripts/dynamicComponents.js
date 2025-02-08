@@ -113,7 +113,7 @@ export function resetTimer(){
 /* ***End of Timer*** */
 
 let currentLineIndex = 0;
-let lFileContent = "[ti:"+document.querySelector("#fileName").textContent+"]\n[re:libraakaja.github.io/Lyrics-File-Maker/]\n\n";
+let lFileContent = "[re:libraakaja.github.io/Lyrics-File-Maker/]\n\n";
 export function highlightNextLine(){
     const tArea = document.querySelector(".lyricsInput");
     const lyrics = tArea.value;
@@ -128,6 +128,10 @@ export function highlightNextLine(){
 
     if(currentLineIndex >= sentences.length){
         btn.disabled = true;
+        pauseTimer();
+        document.querySelector("#aud").pause();
+        changeCSS(".buttons > :nth-child(1)","backgroundImage","url(Assets/play.svg)");
+        changeCSS("#ppIcon","backgroundImage","url(Assets/play.svg)");
         console.log("\nCreating lyrical file");
         const fileBtn = document.querySelector(".buttons > :nth-child(4)");
         fileBtn.addEventListener("click",() => {

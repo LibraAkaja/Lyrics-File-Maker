@@ -131,7 +131,7 @@ export function highlightNextLine(){
         console.log("\nCreating lyrical file");
         const fileBtn = document.querySelector(".buttons > :nth-child(4)");
         fileBtn.addEventListener("click",() => {
-            const blob = new Blob([lFileContent], {type: "text/plain"});
+            const blob = new Blob([lFileContent], {type: "text/lrc"});
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
             a.download = document.querySelector("#fileName").textContent.replace(".mp3","") + ".lrc";

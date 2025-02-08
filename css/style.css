@@ -1,0 +1,197 @@
+*{
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Leoscar',sans-serif;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+    color: white;
+}
+
+body{
+    height: 100vh;
+    background: rgb(20, 20, 20);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1{
+    margin-top: 2vh;
+}
+
+.hidden{
+    display: none;
+}
+
+.input{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#inputAudio{
+    width: 15ch;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 30%;
+}
+
+#iconContainer{
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, #FE03EE, #0DF4FA);
+    cursor: pointer;
+}
+
+#iconContainer:hover{
+    background: linear-gradient(to left, #fe039a, #0dc3fa);
+}
+
+.playerContainer{
+    width: 75%;
+    min-height: 50px;
+    background: black;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+.player{
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    flex-wrap: nowrap;
+}
+
+#ppIcon{
+    height: 25px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    background: url(Assets/play.svg) no-repeat center;
+}
+
+#pIcon{
+    height: 100%;
+    aspect-ratio: 1;
+}
+
+#fileName{
+    width: 55%;
+    height: 20px;
+    color: inherit;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.confirmAudio{
+    width: 75%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.tick{
+    border: 2px solid #FE03EE;
+    height: 15px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mainContainer{
+    border-radius: 5px;
+    width: 75%;
+}
+
+.lyricsInput{
+    padding: 5px;
+    text-align: left;
+    outline: none;
+    border: none;
+    border-radius: inherit;
+    background: rgb(56, 56, 56);
+    width: 100%;
+    height: 300px;
+    font-size: 15px;
+    color: grey;
+}
+
+.lyricsInput::selection{
+    background: transparent;
+    color: wheat;
+}
+
+.confirmLyrics{
+    width: 75%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.mainContainer,.confirmLyrics{
+    margin-top: 10px;
+}
+
+.buttons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button{
+    height: 45px;
+    aspect-ratio: 1;
+    border-radius: 15px;
+}
+
+.buttons > *:nth-child(1){
+    background: url(Assets/play.svg) no-repeat center;
+    border: 2px solid #0DF4FA;
+}
+
+.buttons > *:nth-child(2){
+    background: url(Assets/reset.svg) no-repeat center;
+    border: 2px solid #480dfa;
+}
+
+.buttons > *:nth-child(3){
+    background: url(Assets/nextLine.svg) no-repeat center;
+    border: 2px solid #870dfa;
+}
+
+.buttons > *:nth-child(4){
+    background: url(Assets/download.svg) no-repeat center;
+    border: 2px solid #b70dfa;
+}
+
+.confirmAudio,.askLyrics,.timer{
+    margin-top: 20px;
+}
+
+h1,h3,.input,.player,.confirmAudio,.askLyrics,.confirmLyrics,.timer{
+    background: linear-gradient(to left, #FE03EE, #0DF4FA);
+    background-clip: text;
+    color: transparent;
+}

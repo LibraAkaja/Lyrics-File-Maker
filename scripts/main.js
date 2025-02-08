@@ -64,7 +64,12 @@ function conditionalRender1(){
 }
 
 function conditionalRender2(){
-    changeCSS(".lyricsInput","height","225px");
+    if(window.innerWidth > 425){
+        changeCSS(".lyricsInput","height","66%");
+    }
+    else{
+        changeCSS(".lyricsInput","height","75%");
+    }
     createDElement(".mainContainer","div","buttons");
     createDElement(".buttons","div","button");
     createDElement(".buttons","div","button");

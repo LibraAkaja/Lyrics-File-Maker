@@ -44,21 +44,31 @@ function conditionalRender1(){
             createDElement("body","div","mainContainer");
             createDElement(".mainContainer","textarea","lyricsInput");
             document.querySelector(".lyricsInput").placeholder = "Song Lyrics Here";
-            createDElement("body","div","confirmLyrics");
-            addText(".confirmLyrics","Confirm the Lyrics?");
-            createDElement(".confirmLyrics","div","tick");
-            document.querySelector(".tick").addEventListener("click",(event) => {
-                tickEvents(event);
-                setTimeout(() => {
-                    removeDElement(".confirmLyrics");
+            document.querySelector(".lyricsInput").addEventListener("input",()=>{
+                if(document.querySelector(".lyricsInput").value.trim() !== ""){
                     removeText(".askLyrics");
-                    createDElement(".askLyrics","div","timer");
-                    xchgReln(".askLyrics");
-                    showTimer(".timer");
-                    changeLIcss();
-                    conditionalRender2();
-                }, 1000);
-            },{once:true});
+                    addText(".askLyrics","Confirm the Lyrics?");
+                    document.querySelector(".askLyrics").innerHTML += "&nbsp;&nbsp;"; 
+                    createDElement(".askLyrics","div","tick");
+                    document.querySelector(".tick").addEventListener("click",(event) => {
+                        tickEvents(event);
+                        setTimeout(() => {
+                            removeDElement(".tick");
+                            removeText(".askLyrics");
+                            showTimer(".askLyrics");
+                            changeLIcss();
+                            conditionalRender2();
+                        }, 1000);
+                    },{once:true});
+                }
+                else{
+                    if(document.querySelector(".tick")){
+                        removeDElement(".tick");
+                    }
+                    removeText(".askLyrics");
+                    addText(".askLyrics","Paste the lyrics below");
+                }
+            });
         }, 1000);
     }, {once:true});
 }
@@ -82,7 +92,7 @@ function conditionalRender3(){
     document.querySelector(".buttons > :nth-child(1)").addEventListener("click", () => {
         ppAudio();
         if(document.querySelector(".buttons > :nth-child(1)").style.backgroundImage == "url(Assets/pause.svg)"){
-            startTimer(".timer");
+            startTimer(".askLyrics");
         }
     });
     document.querySelector(".buttons > :nth-child(2)").addEventListener("click", () => {

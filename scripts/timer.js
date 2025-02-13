@@ -16,9 +16,9 @@ let min = 0, sec = 0, ms = 0;
 let timeInterval = null;
 
 function updateTimerDisplay() {
-    const timerElement = document.querySelector(".timer");
+    const timerElement = document.querySelector(".askLyrics");
     if(timerElement){
-        document.querySelector(".timer").textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
+        document.querySelector(".askLyrics").textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
     }
 }
 
@@ -58,7 +58,7 @@ export function resetTimer(){
 
 //To validate the presence of timer
 export function checkTStatus(){
-    if(document.querySelector(".timer")){
+    if(document.querySelector(".askLyrics")){
         return 1;
     }
     else{

@@ -37,7 +37,7 @@ export function highlightNextLine(){
 
     const sentence = sentences[currentLineIndex].trim();    //Taking just a line from the whole lyrics
 
-    lFileContent += "["+document.querySelector(".timer").textContent+"]"+sentence+"\n";
+    lFileContent += "["+document.querySelector(".askLyrics").textContent+"]"+sentence+"\n";
     
     //To find the actual position of a line in the lyrics
     const regEx = new RegExp(`(^|\\s{2,}|\\n)(${sentence.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "g");

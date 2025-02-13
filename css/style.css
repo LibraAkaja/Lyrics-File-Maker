@@ -73,7 +73,6 @@ h1,h3, .askLyrics, .buttons, .mainContainer{
     justify-content: center;
     align-items: center;
     margin-top: 5vh;
-    border: 2px solid red;
     overflow: hidden;
 }
 

@@ -8,6 +8,9 @@
     .buttons{
         justify-content: space-evenly;
     }
+    .tick{
+        height: 15px;
+    }
 }
 
 @media only screen and (min-width: 1025px){
@@ -18,13 +21,10 @@
         width: 23%;
     }
     .askLyrics{
-        font-size: 20px;
+        font-size: 10px;
     }
     .lyricsInput{
         width: 50%;
-    }
-    .confirmLyrics{
-        margin-top: 20px;
     }
     .buttons{
         width: 50%;
@@ -37,18 +37,22 @@
 
 @media only screen and (min-width: 1441px){
     h1{
-        margin-top: 6vh;
-        transform: scale(2.5);
+        margin-top: 5vh;
+        transform: scale(2);
     }
     h3{
-        margin-top: 3vh;
-        transform: scale(2.5);
+        margin-top: 4vh;
+        transform: scale(1.5);
+    }
+    .input{
+        transform: scale(0.5);
     }
     .playerContainer{
-        transform: scale(2);
-        width: 12%;
+        transform: scale(1.15);
+        width: 15%;
+        overflow: hidden;
     }
-    .inputContainer,.confirmAudio,.confirmLyrics{
+    .inputContainer,.confirmAudio{
         transform: scale(2.25);
     }
     .playerContainer,.inputContainer,.confirmAudio{
@@ -56,6 +60,8 @@
     }
     .confirmAudio{
         width: 10%;
+        margin-top: 2vh;
+        transform: scale(1.10);
     }
     .askLyrics,.timer{
         margin-top: 5vh;
@@ -63,25 +69,20 @@
     }
     .mainContainer{
         margin-top: 3vh;
-        height: 700px;
+        height: 400px;
     }
     .lyricsInput{
-        font-size: 35px;
+        font-size: 20px;
         height: 80%;
         padding-left: 10px;
         padding-top: 10px;
-    }
-    .confirmLyrics{
-        width: 10%;
-        position: relative;
-        top: -7%;
     } 
     .buttons{
-        transform: scale(2.25);
-        width: 20%;
+        transform: scale(1.25);
+        width: 30%;
         justify-content: space-around;
         position: relative;
         top: 3%;
-        left: 40%;
+        left: 35%;
     }
 }

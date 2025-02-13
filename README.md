@@ -45,7 +45,11 @@ cd Lyrics-File-Maker
 ```
 
 ## 🖼 Screenshots
-<img src="screenshot.png" width="350">&nbsp;&nbsp;&nbsp;&nbsp;<img src="screenshot2.png" width="350">
+<img src="Screenshots/s1.jpg" width="350">&nbsp;&nbsp;&nbsp;&nbsp;<img src="Screenshots/s2.jpg" width="350">
+<img src="Screenshots/s3.jpg" width="350">&nbsp;&nbsp;&nbsp;&nbsp;<img src="Screenshots/s4.jpg" width="350">
+<img src="Screenshots/s5.jpg" width="350">&nbsp;&nbsp;&nbsp;&nbsp;<img src="Screenshots/s6.jpg" width="350">
+<img src="Screenshots/s7.jpg" width="350">&nbsp;&nbsp;&nbsp;&nbsp;<img src="Screenshots/s8.jpg" width="350">
+<img src="Screenshots/s9.jpg" width="350">&nbsp;&nbsp;&nbsp;&nbsp;<img src="Screenshots/s10.jpg" width="350">
 
 ## Acknowledgements
 - Icons by [Icon Finder](https://www.iconfinder.com/)

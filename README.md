@@ -25,7 +25,7 @@ A simple **.lrc file maker** built with **HTML, CSS, and JavaScript**.
 8. The third button is the next line highlighter button.
 9. The fourth button is the save/download the .lrc file button.
 10. Start playing the audio.
-11. Just right when a particular line of the lyrics sounds, click on the highlighter button.
+11. Just right when the singer starts delivering a particular line of the lyrics, click on the highlighter button.
 12. Once all the lines in the lyrics are done, the file will be created and you are able to download the file by clicking on the save button.
 
 ## 🌐 Live Page

@@ -3,14 +3,16 @@ import { pauseTimer } from "./timer.js";
 
 let currentLineIndex = 0;
 let lFileContent = "[re:libraakaja.github.io/Lyrics-File-Maker/]\n\n";
-export function highlightNextLine(){
+let lineOccurrences = {}; // Track occurrences of each sentence
+
+export function highlightNextLine() {
     const tArea = document.querySelector(".lyricsInput");
     const lyrics = tArea.value;
     const btn = document.querySelector(".buttons > :nth-child(3)");
 
-    const sentences = lyrics.split(/\s{2,}|\n+/).filter(s => s.trim() !== "");  //Divide lyrics into sentences based on large whitespaces
-    
-    if(sentences.length === 0){
+    const sentences = lyrics.split(/\s{2,}|\n+/).filter(s => s.trim() !== ""); // Split lyrics
+
+    if (sentences.length === 0) {
         console.log("No text found in the lyrics!");
         return;
     }
@@ -19,56 +21,98 @@ export function highlightNextLine(){
         btn.disabled = true;
         pauseTimer();
         document.querySelector("#aud").pause();
-        changeCSS(".buttons > :nth-child(1)","backgroundImage","url(Assets/play.svg)");
-        changeCSS("#ppIcon","backgroundImage","url(Assets/play.svg)");
+        changeCSS(".buttons > :nth-child(1)", "backgroundImage", "url(Assets/play.svg)");
+        changeCSS("#ppIcon", "backgroundImage", "url(Assets/play.svg)");
         console.log("\nCreating lyrical file");
+    
         const fileBtn = document.querySelector(".buttons > :nth-child(4)");
-        fileBtn.addEventListener("click",() => {
-            const blob = new Blob([lFileContent], {type: "application/octet-stream"});
+    
+        // Remove any previously attached event listener
+        fileBtn.replaceWith(fileBtn.cloneNode(true));
+        const newFileBtn = document.querySelector(".buttons > :nth-child(4)");
+    
+        // Add event listener to the new button
+        newFileBtn.addEventListener("click", () => {
+            const blob = new Blob([lFileContent], { type: "application/octet-stream" });
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
-            a.download = document.querySelector("#fileName").textContent.replace(".mp3","") + ".lrc";
+            a.download = document.querySelector("#fileName").textContent.replace(".mp3", "") + ".lrc";
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
         });
+    
         return;
+    }       
+
+    const sentence = sentences[currentLineIndex].trim(); // Get the current sentence
+    lFileContent += "[" + document.querySelector(".askLyrics").textContent + "]" + sentence + "\n";
+
+    // Initialize occurrences tracker
+    if (!lineOccurrences[sentence]) {
+        lineOccurrences[sentence] = 0;
     }
 
-    const sentence = sentences[currentLineIndex].trim();    //Taking just a line from the whole lyrics
-
-    lFileContent += "["+document.querySelector(".askLyrics").textContent+"]"+sentence+"\n";
-    
-    //To find the actual position of a line in the lyrics
+    // Find the nth occurrence of the sentence
     const regEx = new RegExp(`(^|\\s{2,}|\\n)(${sentence.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "g");
     let match;
-    let startIndex = -1;
-    while((match = regEx.exec(lyrics)) !== null){
-        startIndex = match.index + match[1].length;
-        break;
+    let occurrenceCount = 0;
+    let foundIndex = -1;
+
+    while ((match = regEx.exec(lyrics)) !== null) {
+        if (occurrenceCount === lineOccurrences[sentence]) {
+            foundIndex = match.index + match[1].length;
+            break;
+        }
+        occurrenceCount++;
     }
-    if(startIndex === -1){
+
+    if (foundIndex === -1) {
         console.error("Line not found in the Lyrics!");
         return;
     }
-    
-    const endIndex = startIndex + sentence.length;
-    
-    //To highlight the found line of the lyrics
-    tArea.focus();
-    tArea.setSelectionRange(startIndex, endIndex);
 
-    //To scroll to the highlighted sentence
+    const endIndex = foundIndex + sentence.length;
+
+    // Highlight the nth occurrence of the sentence
+    tArea.focus();
+    tArea.setSelectionRange(foundIndex, endIndex);
+
+    // Keep the highlighted text within view without resetting to the top
     setTimeout(() => {
-        const lineheight = parseFloat(window.getComputedStyle(tArea).lineHeight);
-        const scrolltop = Math.floor(startIndex / tArea.cols) * lineheight;
-        tArea.scrollTop = scrolltop;
+        const selectionStart = tArea.selectionStart;
+        const selectionEnd = tArea.selectionEnd;
+
+        // Create a temporary span to measure the position of the text
+        const tempSpan = document.createElement("span");
+        tempSpan.style.position = "absolute";
+        tempSpan.style.whiteSpace = "pre-wrap";
+        tempSpan.style.visibility = "hidden";
+        tempSpan.style.font = window.getComputedStyle(tArea).font;
+        tempSpan.textContent = lyrics.substring(0, selectionStart);
+
+        document.body.appendChild(tempSpan);
+        const textPosition = tempSpan.offsetHeight;
+        document.body.removeChild(tempSpan);
+
+        // Only scroll if the selected text is out of the visible area
+        const scrollMargin = 20; // Small margin to prevent over-scrolling
+        if (textPosition < tArea.scrollTop || textPosition > tArea.scrollTop + tArea.clientHeight - scrollMargin) {
+            tArea.scrollTo({
+                top: textPosition - tArea.clientHeight / 2, // Centering effect
+                behavior: "smooth"
+            });
+        }
     }, 100);
 
+    // Move to the next sentence for the next call
+    lineOccurrences[sentence]++;
     currentLineIndex++;
 }
 
 export function resetHighlight(){
     document.querySelector(".buttons > :nth-child(2)").disabled = false;
     currentLineIndex = 0;
+    lineOccurrences = {};
+    lFileContent = "[re:libraakaja.github.io/Lyrics-File-Maker/]\n\n";
 }

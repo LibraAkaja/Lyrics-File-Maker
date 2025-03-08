@@ -8,7 +8,7 @@ const a = document.querySelector("#aud");
 const ppIcon = document.querySelector("#ppIcon");
 
 //Clicking attach icon changes state of the hidden input field
-document.querySelector("#iconContainer").addEventListener("click", function() {
+document.querySelector("#iconContainer2").addEventListener("click", function() {
     document.querySelector("#a").click();
 });
 

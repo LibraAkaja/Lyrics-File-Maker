@@ -64,6 +64,17 @@ h1,h3, .askLyrics, .buttons, .mainContainer{
     background: linear-gradient(to left, #fe039a, #0dc3fa);
 }
 
+#iconContainer1{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    font-size: 17.5px;
+    aspect-ratio: 1;
+    color: black;
+    position: fixed;
+    top: 2.5vh;
+    right: 2.5vw;
+}
+
 .playerContainer{
     width: 75%;
     min-height: 50px;
@@ -200,4 +211,11 @@ h1,h3,.input,.player,.confirmAudio,.askLyrics,.timer{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media only screen and (min-width: 374px){
+    #iconContainer1{
+        position: fixed;
+        right: 5vw;
+    }
 }

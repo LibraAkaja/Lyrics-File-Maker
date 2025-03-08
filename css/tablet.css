@@ -44,4 +44,8 @@
         justify-content: space-around;
         margin-top: 20px;
     }
+    #iconContainer1{
+        position: fixed;
+        top: 4.5vh;
+    }
 }

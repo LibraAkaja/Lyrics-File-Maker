@@ -49,7 +49,7 @@ h1,h3, .askLyrics, .buttons, .mainContainer{
     left: 30%;
 }
 
-#iconContainer{
+.iconContainer{
     border: 2px solid black;
     border-radius: 5px;
     width: 20px;
@@ -60,7 +60,7 @@ h1,h3, .askLyrics, .buttons, .mainContainer{
     cursor: pointer;
 }
 
-#iconContainer:hover{
+.iconContainer:hover{
     background: linear-gradient(to left, #fe039a, #0dc3fa);
 }
 

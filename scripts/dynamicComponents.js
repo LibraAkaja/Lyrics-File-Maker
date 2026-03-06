@@ -27,6 +27,14 @@ export function removeDElement(e){
     document.querySelector(e).remove();
 }
 
+export function removeDeseElements(e){
+    e.forEach(element => {
+        if(document.querySelector(element)){
+            document.querySelector(element).remove();
+        }
+    });
+}
+
 /*Function to change the css of an element*/
 export function changeCSS(e, prop, val) {
     document.querySelector(e).style[prop] = val;

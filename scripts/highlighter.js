@@ -1,4 +1,4 @@
-import { changeCSS } from "./dynamicComponents.js";
+import { changeCSS, createDElement, removeDeseElements } from "./dynamicComponents.js";
 import { pauseTimer } from "./timer.js";
 
 let currentLineIndex = 0;
@@ -41,6 +41,23 @@ export function highlightNextLine() {
             a.click();
             document.body.removeChild(a);
         });
+
+        newFileBtn.addEventListener("click",() => {
+            createDElement("body","div","refresh");
+            createDElement(".refresh","button","ref-btn");
+            document.querySelector(".ref-btn").textContent = "Make another lyrical file";
+            document.querySelector(".refresh").addEventListener("mouseover", ()=> {
+                changeCSS(".ref-btn","background","linear-gradient(to right, #00ffd0, #008cff, #b300ff, #ff00fb)");
+                changeCSS(".ref-btn", "backgroundClip","text");
+            });
+            document.querySelector(".refresh").addEventListener("mouseleave",()=>{
+                changeCSS(".ref-btn","background","linear-gradient(to right, #0DF4FA, #480dfa,#870dfa,#b70dfa)");
+                changeCSS(".ref-btn", "backgroundClip", "text");
+            });
+            document.querySelector(".ref-btn").addEventListener("click", () => {
+                location.reload();
+            });
+        },{once:true});
     
         return;
     }       

@@ -1,7 +1,6 @@
 *{
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
     font-family: 'Leoscar',sans-serif;
     font-weight: 400;
     text-align: center;
@@ -10,16 +9,17 @@
 }
 
 body{
-    height: 100vh;
+    min-height: 100vh;
     background: rgb(20, 20, 20);
-    padding: 10px;
+    padding: 25px 0px 25px 0px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 h1{
-    margin-top: 2vh;
+    margin-top: 26px;
 }
 
 h1,h3, .askLyrics, .buttons, .mainContainer{
@@ -130,7 +130,7 @@ h1,h3, .askLyrics, .buttons, .mainContainer{
 
 .tick{
     border: 2px solid #FE03EE;
-    height: 20px;
+    height: 17px;
     aspect-ratio: 1;
     border-radius: 50%;
     cursor: pointer;
@@ -139,7 +139,7 @@ h1,h3, .askLyrics, .buttons, .mainContainer{
 .mainContainer{
     border-radius: 5px;
     width: 80%;
-    height: 300px;
+    height: 350px;
     overflow: hidden;
     margin-top: 10px;
     padding-bottom: 10px;
@@ -153,7 +153,7 @@ h1,h3, .askLyrics, .buttons, .mainContainer{
     border-radius: inherit;
     background: rgb(56, 56, 56);
     width: 100%;
-    height: 100%;
+    height: 80%;
     font-size: 15px;
     color: grey;
 }
@@ -211,6 +211,30 @@ h1,h3,.input,.player,.confirmAudio,.askLyrics,.timer{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.refresh{
+    padding: 13px;
+    border-radius: 0.75rem;
+    background: #222222;
+    border: 2px solid #444444;
+    cursor: pointer;
+}
+
+.refresh:hover{
+    transform: translateY(-2px) scale(1.05);
+    background: #111111;
+    border: 2px solid #333333;
+    transition: all 0.26s ease-in-out;
+}
+
+.ref-btn{
+    all: unset;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #0DF4FA, #480dfa,#870dfa,#b70dfa);
+    background-clip: text;
+    color: transparent;
 }
 
 @media only screen and (min-width: 374px){
